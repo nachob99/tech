@@ -18,7 +18,6 @@ public class SupportSystem
 {
     private InputReader reader;
     private Responder responder;
-    private String input;
     
     /**
      * Creates a technical support system.
@@ -33,16 +32,16 @@ public class SupportSystem
      * Start the technical support system. This will print a welcome message and enter
      * into a dialog with the user, until the user ends the dialog.
      */
-    public void start()
+     public void start()
     {
         boolean finished = false;
 
         printWelcome();
 
         while(!finished) {
-            String input = reader.getInput().trim().toLowerCase();
+            HashSet<String> input = reader.getInput();
 
-            if(input.equals("bye")) {
+            if(input.contains("bye")) {
                 finished = true;
             }
             else {

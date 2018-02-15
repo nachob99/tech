@@ -20,11 +20,6 @@ import java.util.Random;
  */
 public class Responder
 {
-    // Used to map key words to responses.
-    private HashMap<String, String> responseMap;
-    // Default responses to use if we don't recognise a word.
-    private ArrayList<String> defaultResponses;
-    private Random randomGenerator;
     private Random random;
     private ArrayList<String> respuesta;
     private HashMap<String, String> palabras;
@@ -53,10 +48,14 @@ public class Responder
      * Generate a response.
      * @return   A string that should be displayed as the response
      */
-    public String generateResponse(String word)
+    public String generateResponse(HashSet<String> userInput)
     {
         String response = null;
-        response = palabras.get(word);
+        String userInputString="";
+        for(String elemento : userInput){
+            userInputString = elemento;
+        }
+        response = palabras.get(userInputString);
         if (response == null) {
             response = respuesta.get(random.nextInt(respuesta.size()));           
         }
