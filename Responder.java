@@ -22,34 +22,30 @@ public class Responder
 {
     private Random random;
     private ArrayList<String> respuesta;
-     private HashMap<HashSet<String>, String> palabras;
+    private HashMap<HashSet<String>, String> palabras;
     /**
      * Construct a Responder
      */
     public Responder()
     {
         random = new Random();
-        respuesta = new ArrayList<String>();
+
         palabras = new HashMap<>();
-        respuesta.add("Buenas");
-        respuesta.add("Estamos trabajando en ello");
-        respuesta.add("¿Necesita algo?");
-        respuesta.add("Esperemos que no sea nada");
-        respuesta.add("Un placer conocerle");   
-        respuesta.add("No hay solucion");   
-  
+        
+        createDefaultResponses();
+
         HashSet<String> opcion1 = new HashSet<String>();
         opcion1.add("Lo siento");
         opcion1.add("Ha muerto");
-        
+
         HashSet<String> opcion2 = new HashSet<String>();  
         opcion2.add("imposible");
-        
+
         HashSet<String> opcion3 = new HashSet<String>(); 
         opcion3.add("esto");
         opcion3.add("no");
         opcion3.add("va");
-        
+
         palabras.put(opcion1, "El ordenador");
         palabras.put(opcion2, "No aceptamos cambios");
         palabras.put(opcion3, "no hace nada");
@@ -62,12 +58,29 @@ public class Responder
     public String generateResponse(HashSet<String> userInput)
     {
         String response = null;
-        
+
         response = palabras.get(userInput);
-        
+
         if (response == null) {
-            response = respuesta.get(random.nextInt(respuesta.size()));           
+            if(respuesta.size() > 0){
+                response = respuesta.get(random.nextInt(respuesta.size()));  
+            }
+            else{
+                response = "lo siento no le entiendo";
+
+            }
         }
         return response;
+    }
+    
+    private void createDefaultResponses(){
+        respuesta = new ArrayList<String>();
+        
+        respuesta.add("Buenas");
+        respuesta.add("Estamos trabajando en ello");
+        respuesta.add("¿Necesita algo?");
+        respuesta.add("Esperemos que no sea nada");
+        respuesta.add("Un placer conocerle");   
+        respuesta.add("No hay solucion");   
     }
 }
