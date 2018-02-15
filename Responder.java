@@ -41,7 +41,7 @@ public class Responder
         palabras.put("Tiempo al tiempo.", "No es nada");
         palabras.put("Garantia? QUE ES ESO", "NO HAY");
         palabras.put("No queda" , "NADA");
-        
+
     }
 
     /**
@@ -51,16 +51,18 @@ public class Responder
     public String generateResponse(HashSet<String> userInput)
     {
         String response = null;
-        String userInputString="";
-        for(String elemento : userInput){
-            userInputString = elemento;
+        Iterator<String> iterator = userInput.iterator();
+        boolean searching = true;
+        while(iterator.hasNext() && searching){
+            response = palabras.get(iterator.next());
+            if (response != null){
+                searching = false;
+            }
         }
-        response = palabras.get(userInputString);
         if (response == null) {
             response = respuesta.get(random.nextInt(respuesta.size()));           
         }
         return response;
     }
-
 
 }
