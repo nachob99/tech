@@ -18,6 +18,7 @@ public class SupportSystem
 {
     private InputReader reader;
     private Responder responder;
+    private String input;
     
     /**
      * Creates a technical support system.

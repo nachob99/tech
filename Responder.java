@@ -27,30 +27,41 @@ public class Responder
     private Random randomGenerator;
     private Random random;
     private ArrayList<String> respuesta;
+    private HashMap<String, String> palabras;
     /**
      * Construct a Responder
      */
     public Responder()
     {
-         random = new Random();
+        random = new Random();
         respuesta = new ArrayList<String>();
+        palabras = new HashMap<>();
         respuesta.add("Buenas");
         respuesta.add("Estamos trabajando en ello");
         respuesta.add("¿Necesita algo?");
         respuesta.add("Esperemos que no sea nada");
         respuesta.add("Un placer conocerle");   
-        respuesta.add("No hay solucion");    
+        respuesta.add("No hay solucion");   
+
+        palabras.put("Tiempo al tiempo.", "No es nada");
+        palabras.put("Garantia? QUE ES ESO", "NO HAY");
+        palabras.put("No queda" , "NADA");
+        
     }
 
     /**
-     * Generate a response from a given set of input words.
-     * 
-     * @param words  A set of words entered by the user
-     * @return       A string that should be displayed as the response
+     * Generate a response.
+     * @return   A string that should be displayed as the response
      */
-    public String generateResponse(HashSet<String> words)
+    public String generateResponse(String word)
     {
-         return respuesta.get(random.nextInt(respuesta.size()));
+        String response = null;
+        response = palabras.get(word);
+        if (response == null) {
+            response = respuesta.get(random.nextInt(respuesta.size()));           
+        }
+        return response;
     }
+
 
 }
