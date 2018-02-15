@@ -22,7 +22,7 @@ public class Responder
 {
     private Random random;
     private ArrayList<String> respuesta;
-    private HashMap<String, String> palabras;
+     private HashMap<HashSet<String>, String> palabras;
     /**
      * Construct a Responder
      */
@@ -37,11 +37,22 @@ public class Responder
         respuesta.add("Esperemos que no sea nada");
         respuesta.add("Un placer conocerle");   
         respuesta.add("No hay solucion");   
-
-        palabras.put("Tiempo al tiempo.", "No es nada");
-        palabras.put("Garantia? QUE ES ESO", "NO HAY");
-        palabras.put("No queda" , "NADA");
-
+  
+        HashSet<String> opcion1 = new HashSet<String>();
+        opcion1.add("Lo siento");
+        opcion1.add("Ha muerto");
+        
+        HashSet<String> opcion2 = new HashSet<String>();  
+        opcion2.add("imposible");
+        
+        HashSet<String> opcion3 = new HashSet<String>(); 
+        opcion3.add("esto");
+        opcion3.add("no");
+        opcion3.add("va");
+        
+        palabras.put(opcion1, "El ordenador");
+        palabras.put(opcion2, "No aceptamos cambios");
+        palabras.put(opcion3, "no hace nada");
     }
 
     /**
@@ -51,18 +62,12 @@ public class Responder
     public String generateResponse(HashSet<String> userInput)
     {
         String response = null;
-        Iterator<String> iterator = userInput.iterator();
-        boolean searching = true;
-        while(iterator.hasNext() && searching){
-            response = palabras.get(iterator.next());
-            if (response != null){
-                searching = false;
-            }
-        }
+        
+        response = palabras.get(userInput);
+        
         if (response == null) {
             response = respuesta.get(random.nextInt(respuesta.size()));           
         }
         return response;
     }
-
 }
